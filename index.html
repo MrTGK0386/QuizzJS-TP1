@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/src/styles.css" />
+  </head>
+
+  <body>
+    <div id="score" class="score">A</div>
+    <div id="question" class="texte_question">Emplacement question</div>
+    <div id="Reponses">
+      <button id="reponse1" class="texte_reponse" onclick="clickReponse(1)">
+        Emplacement réponse 1
+      </button>
+      <button id="reponse2" class="texte_reponse" onclick="clickReponse(2)">
+        Emplacement réponse 2
+      </button>
+      <button id="reponse3" class="texte_reponse" onclick="clickReponse(3)">
+        Emplacement réponse 3
+      </button>
+      <button id="reponse4" class="texte_reponse" onclick="clickReponse(4)">
+        Emplacement réponse 4
+      </button>
+    </div>
+    <div id="res" class="texte_resultat">Zone Résultat</div>
+    <button id="nextQuestion" onclick="presenterQuestion()">
+      Question suivante
+    </button>
+    <script>
+      var zoneQuestion = document.getElementById("question");
+      var zoneReponse1 = document.getElementById("reponse1");
+      var zoneReponse2 = document.getElementById("reponse2");
+      var zoneReponse3 = document.getElementById("reponse3");
+      var zoneReponse4 = document.getElementById("reponse4");
+      var zoneResultat = document.getElementById("res");
+      var zoneBoutonNext = document.getElementById("nextQuestion");
+      var idReponseCorrecte;
+
+      function presenterQuestion() {
+        zoneResultat.style.visibility = "hidden";
+        zoneBoutonNext.style.visibility = "hidden";
+        zoneReponse1.disabled = false;
+        zoneReponse2.disabled = false;
+        zoneReponse3.disabled = false;
+        zoneReponse4.disabled = false;
+        zoneReponse1.style.opacity = 1;
+        zoneReponse2.style.opacity = 1;
+        zoneReponse3.style.opacity = 1;
+        zoneReponse4.style.opacity = 1;
+        var tabQuestions = [
+          [
+            "Quelle est la deuxième planète du système solaire?",
+            "Mercure",
+            "Venus",
+            "Mars",
+            "Pluton",
+            2
+          ],
+          [
+            "Qui c'est le plus fort, l'hippopotame ou l'éléphant?",
+            "L'hyppopotame",
+            "l'elephant",
+            "ils sont de force égale",
+            "j'ai pas la ref",
+            2
+          ],
+          [
+            "Quelle est la réponse à La grande question sur la vie, l'univers et le reste ?",
+            "AYBABTU",
+            "Obiwan Kenoby",
+            "42",
+            "La réponse D",
+            3
+          ],
+          [
+            "Comment est mort Jack Daniel's?",
+            "Assassiné avec une faucille et un marteau",
+            "d'une syrhose du foie",
+            "Attaqué par un essaim d'abeilles",
+            "Il s'est cogné le petit orteil contre son coffre-fort",
+            4
+          ],
+          [
+            "Comment est la blanquette?",
+            "Elle est bonne",
+            "Elle est mauvaise",
+            "Elle est blan...quette",
+            "Laisse tomber j'ai pas la ref",
+            1
+          ],
+          [
+            "Quelle est la deuxième planète du système solaire?",
+            "Mercure",
+            "Venus",
+            "Mars",
+            "Pluton",
+            2
+          ]
+        ];
+
+        var idQuestion = Math.floor(Math.random() * tabQuestions.length);
+
+        var groupeQuestionReponses = tabQuestions[idQuestion];
+
+        zoneQuestion.innerHTML = groupeQuestionReponses[0];
+        zoneReponse1.innerHTML = groupeQuestionReponses[1];
+        zoneReponse2.innerHTML = groupeQuestionReponses[2];
+        zoneReponse3.innerHTML = groupeQuestionReponses[3];
+        zoneReponse4.innerHTML = groupeQuestionReponses[4];
+        idReponseCorrecte = groupeQuestionReponses[5];
+      }
+      presenterQuestion();
+
+      function clickReponse(numReponseCliquee) {
+        zoneReponse1.disabled = true;
+        zoneReponse2.disabled = true;
+        zoneReponse3.disabled = true;
+        zoneReponse4.disabled = true;
+        zoneResultat.style.visibility = "visible";
+        zoneBoutonNext.style.visibility = "visible";
+        if (numReponseCliquee != 1) zoneReponse1.style.opacity = 0.5;
+        if (numReponseCliquee != 2) zoneReponse2.style.opacity = 0.5;
+        if (numReponseCliquee != 3) zoneReponse3.style.opacity = 0.5;
+        if (numReponseCliquee != 4) zoneReponse4.style.opacity = 0.5;
+        if (idReponseCorrecte == numReponseCliquee) {
+          zoneResultat.innerHTML = "Votre reponse est juste";
+        } else {
+          zoneResultat.innerHTML = "Votre reponse est fausse";
+        }
+      }
+    </script>
+  </body>
+</html>
